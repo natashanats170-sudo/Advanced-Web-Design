@@ -1,0 +1,192 @@
+Form.html.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 400px; margin: 60px auto; }
+    input, button { width: 100%; padding: 10px; margin: 8px 0; }
+    button { background: #1F4E79; color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>Enter Your Name</h2>
+  <form action="process.php" method="POST">
+    <input type="text" name="username" placeholder="Your name" required>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
+
+
+Process.php.
+<?php
+  // Receive POST data
+  $name = $_POST['username'];
+ 
+  // Sanitize to prevent XSS
+  $name = htmlspecialchars($name);
+ 
+  // Generate dynamic response
+  echo "<!DOCTYPE html><html><body>";
+  echo "<h2>Welcome, " . $name . "!</h2>";
+  echo "<p>Your name was received and processed by the PHP server.</p>";
+  echo "<a href='form.html'>Go Back</a>";
+  echo "</body></html>";
+?>
+
+
+Register.html.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>Register</title>
+  <style>
+    body { font-family: Arial; max-width: 480px; margin: 60px auto; padding: 0 20px; }
+    input, select { width:100%; padding:10px; margin:8px 0; border:1px solid #ccc; border-radius:4px; }
+    button { width:100%; padding:12px; background:#1F4E79; color:white; border:none; border-radius:4px; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <h2>Create Account</h2>
+  <form action="register.php" method="POST">
+    <label>Full Name</label>
+    <input type="text"     name="fullname" required>
+    <label>Email</label>
+    <input type="email"    name="email"    required>
+    <label>Password</label>
+    <input type="password" name="password" required>
+    <label>Course</label>
+    <select name="course">
+      <option>BIT3208</option>
+      <option>BIT2100</option>
+      <option>BIT3300</option>
+    </select>
+    <button type="submit">Register</button>
+  </form>
+</body>
+</html>
+
+
+Register.php.
+<?php
+  // Receive and sanitize form data
+  $fullname = htmlspecialchars($_POST['fullname']);
+  $email    = htmlspecialchars($_POST['email']);
+  $password = $_POST['password'];
+  $course   = htmlspecialchars($_POST['course']);
+ 
+  // Basic server-side validation
+  $errors = [];
+if (empty($fullname)) {
+    $errors[] = "Full name is required.";
+  }
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = "Invalid email address.";
+  }
+  if (strlen($password) < 6) {
+    $errors[] = "Password must be at least 6 characters.";
+  }
+ 
+  if (!empty($errors)) {
+    foreach ($errors as $err) {
+      echo "<p style='color:red;'>" . $err . "</p>";
+    }
+    echo "<a href='register.html'>Go Back</a>";
+  } else {
+    echo "<h2>Registration Successful!</h2>";
+    echo "<p>Name:   " . $fullname . "</p>";
+    echo "<p>Email:  " . $email    . "</p>";
+    echo "<p>Course: " . $course   . "</p>";
+  }
+?>
+
+
+Login.php
+<?php session_start(); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>Login</title>
+  <style>
+    body { font-family: Arial; max-width: 380px; margin: 80px auto; padding: 0 20px; }
+    input  { width:100%; padding:10px; margin:8px 0; border:1px solid #ccc; border-radius:4px; }
+    button { width:100%; padding:12px; background:#1F4E79; color:white; border:none; border-radius:4px; cursor:pointer; }
+    .error { color: red; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Login</h2>
+ 
+  <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $username = htmlspecialchars($_POST['username']);
+      $password = $_POST['password'];
+ 
+      // Hardcoded credentials for demo
+      // In production, compare against database
+      $validUser = 'admin';
+      $validPass = 'admin123';
+ 
+      if ($username === $validUser && $password === $validPass) {
+        $_SESSION['user']     = $username;
+        $_SESSION['loggedIn'] = true;
+        header('Location: dashboard.php');
+        exit();
+      } else {
+        $error = 'Invalid username or password.';
+      }
+    }
+  ?>
+ 
+  <form method="POST">
+    <label>Username</label>
+    <input type="text"     name="username" placeholder="admin" required>
+    <label>Password</label>
+    <input type="password" name="password" placeholder="admin123" required>
+    <button type="submit">Login</button>
+    <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
+  </form>
+</body>
+</html>
+
+
+Dashboard.php
+<?php
+  session_start();
+ 
+  // Redirect to login if not authenticated
+  if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    header('Location: login.php');
+    exit();
+  }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>Dashboard</title>
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: 60px auto; }
+    .card { background: #f0f7ff; border-radius: 8px; padding: 30px; }
+    a { color: #1F4E79; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Welcome, <?php echo $_SESSION['user']; ?>!</h2>
+    <p>You are now logged in. This page is protected.</p>
+    <p><a href="logout.php">Logout</a></p>
+  </div>
+</body>
+</html>
+
+
+Logout.php.
+<?php
+  session_start();
+  session_unset();    // Remove all session variables
+  session_destroy();  // Destroy the session
+  header('Location: login.php');
+  exit();
+?>
