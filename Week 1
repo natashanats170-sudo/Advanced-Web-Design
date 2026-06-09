@@ -11,9 +11,31 @@ Index.html.
 </body>
 </html>
 
+
 Hello.php.
 <?php
   echo "<h1>Hello, World!</h1>";
   echo "<p>PHP is working on my localhost!</p>";
   echo "<p>Today is: " . date('Y-m-d') . "</p>";
+?>
+
+
+Database connectivity.
+<?php
+  // Connection parameters
+  $host   = "localhost";
+  $user   = "root";
+  $pass   = "";         // XAMPP default: empty password
+  $dbname = "testdb";
+ 
+  // Attempt connection
+  $conn = mysqli_connect($host, $user, $pass, $dbname);
+ 
+  // Check result
+  if (!$conn) {
+    die("Connection FAILED: " . mysqli_connect_error());
+  }
+ 
+  echo "<h2>Database connection SUCCESSFUL!</h2>";
+  echo "<p>Connected to: " . $dbname . "</p>";
 ?>
