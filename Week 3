@@ -1,0 +1,203 @@
+JavaScript concepts.
+// 1. Variables
+let name    = "Alice";
+const age   = 20;
+var  course = "BIT3208";
+ 
+// 2. Functions
+function greet(username) {
+  return "Hello, " + username + "!";
+}
+console.log(greet(name));   // Hello, Alice!
+ 
+// 3. If / Else
+if (age >= 18) {
+  console.log("Adult");
+} else {
+  console.log("Minor");
+}
+ 
+// 4. Loops
+for (let i = 1; i <= 5; i++) {
+  console.log("Item " + i);
+}
+ 
+// 5. Arrays
+let subjects = ["PHP", "JavaScript", "MySQL"];
+subjects.forEach(function(s) { console.log(s); });
+
+
+Registration Form.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 480px; margin: 60px auto; }
+    input { width: 100%; padding: 10px; margin: 8px 0 4px; border: 1px solid #ccc; border-radius: 4px; }
+    button { width: 100%; padding: 12px; background: #1F4E79; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .error { color: red; font-size: 13px; }
+    .success { color: green; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Register</h2>
+  <form id="regForm" onsubmit="return validateForm()">
+    <label>Full Name</label>
+    <input type="text" id="name" placeholder="Enter your full name">
+    <span class="error" id="nameErr"></span>
+ 
+    <label>Email</label>
+    <input type="email" id="email" placeholder="Enter your email">
+    <span class="error" id="emailErr"></span>
+ 
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Min 6 characters">
+    <span class="error" id="passErr"></span>
+ 
+    <button type="submit">Register</button>
+    <p class="success" id="successMsg"></p>
+  </form>
+ 
+  <script>
+    function validateForm() {
+      let valid = true;
+ 
+      // Clear previous errors
+      document.getElementById('nameErr').textContent  = '';
+      document.getElementById('emailErr').textContent = '';
+      document.getElementById('passErr').textContent  = '';
+ 
+      const name  = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const pass  = document.getElementById('password').value;
+ 
+      if (name === '') {
+        document.getElementById('nameErr').textContent = 'Full name is required.';
+        valid = false;
+      }
+      if (!email.includes('@') || !email.includes('.')) {
+        document.getElementById('emailErr').textContent = 'Enter a valid email address.';
+        valid = false;
+      }
+      if (pass.length < 6) {
+        document.getElementById('passErr').textContent = 'Password must be at least 6 characters.';
+        valid = false;
+      }
+ 
+      if (valid) {
+        document.getElementById('successMsg').textContent = 'Registration successful!';
+      }
+      return false; // Prevent actual form submit for now
+    }
+  </script>
+</body>
+</html>
+
+
+DOM Manipulation.
+<!DOCTYPE html>
+<html lang="en">
+<head><title>DOM Demo</title></head>
+<body>
+  <h2 id="title">Original Title</h2>
+  <p  id="msg">Click a button below to see DOM manipulation.</p>
+  <button onclick="changeTitle()">Change Title</button>
+  <button onclick="changeColour()">Change Colour</button>
+  <button onclick="addParagraph()">Add Paragraph</button>
+ 
+  <script>
+    // Change text content
+    function changeTitle() {
+      document.getElementById('title').textContent = 'Title Changed by JavaScript!';
+    }
+ 
+    // Change CSS style
+    function changeColour() {
+      document.getElementById('msg').style.color      = 'blue';
+      document.getElementById('msg').style.fontWeight = 'bold';
+    }
+ 
+    // Create and insert a new element
+    function addParagraph() {
+      const newP   = document.createElement('p');
+      newP.textContent = 'This paragraph was added dynamically!';
+      newP.style.color = 'green';
+      document.body.appendChild(newP);
+    }
+  </script>
+</body>
+</html>
+
+
+PHP Concepts.
+<?php
+  // 1. Variables and data types
+  $name    = "Alice";
+  $age     = 20;
+  $gpa     = 3.75;
+  $active  = true;
+ 
+  // 2. Echo and print
+  echo "<h2>Student: $name</h2>";
+  echo "<p>Age: $age | GPA: $gpa</p>";
+ 
+  // 3. If / else
+  if ($gpa >= 3.5) {
+    echo "<p>Status: <strong>Dean's List</strong></p>";
+  } else {
+    echo "<p>Status: Good Standing</p>";
+  }
+ 
+  // 4. For loop
+  echo "<ul>";
+  for ($i = 1; $i <= 5; $i++) {
+    echo "<li>Week $i</li>";
+  }
+  echo "</ul>";
+ 
+  // 5. Array and foreach
+  $subjects = ["HTML", "CSS", "PHP", "MySQL"];
+  echo "<ol>";
+  foreach ($subjects as $subject) {
+    echo "<li>$subject</li>";
+  }
+  echo "</ol>";
+ 
+  // 6. Function
+  function getGreeting($username) {
+    return "Welcome, " . $username . "!";
+  }
+  echo "<p>" . getGreeting($name) . "</p>";
+?>
+
+
+Re-Test Database Connection.
+<?php
+  $conn = mysqli_connect("localhost", "root", "", "testdb");
+ 
+  if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+  }
+ 
+  // Create a test table if it doesn't exist
+  $createSQL = "CREATE TABLE IF NOT EXISTS test_log (
+    id      INT AUTO_INCREMENT PRIMARY KEY,
+    message VARCHAR(255),
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  )";
+  mysqli_query($conn, $createSQL);
+ 
+  // Insert a test record
+  $insertSQL = "INSERT INTO test_log (message) VALUES ('Week 3 DB test OK')";
+  if (mysqli_query($conn, $insertSQL)) {
+    echo "<p>Test record inserted successfully!</p>";
+  }
+ 
+  // Read it back
+  $result = mysqli_query($conn, "SELECT * FROM test_log");
+  while ($row = mysqli_fetch_assoc($result)) {
+    echo "<p>[" . $row['created'] . "] " . $row['message'] . "</p>";
+  }
+?>
