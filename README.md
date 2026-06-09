@@ -6,7 +6,6 @@
 **Student Name:** NATASHA WANJIRU THUNGU  
 **Admission Number:** BSCCS/2024/53895  
 **Department:** Computing and Informatics  
-**Lecturer:** MR. NYORO  
 **Year/Semester:** 2026, May/August  
 
 ---
