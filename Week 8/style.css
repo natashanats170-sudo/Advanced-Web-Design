@@ -1,0 +1,79 @@
+/* Import responsive styles */
+@import url('responsive.css');
+
+/* Your existing style.css content below... */
+:root {
+    --blue-dark: #1F4E79;
+    --blue-mid: #2E75B6;
+    --gold: #FDB813;
+    /* ... rest of your existing CSS ... */
+}
+:root {
+    --blue-dark: #1F4E79;
+    --blue-mid:  #2E75B6;
+    --gold:      #FDB813;
+    --bg:        #F0F4F8;
+    --surface:   #FFFFFF;
+    --border:    #CBD5E1;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: #1E293B; }
+
+/* Auth pages */
+.auth-page { min-height: 100vh; background: linear-gradient(135deg, #1F4E79, #0d2137); display: flex; flex-direction: column; }
+.auth-hero { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+.auth-card { background: #fff; border-radius: 16px; padding: 36px; width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,.2); }
+
+/* Navbar */
+.navbar { background: #1F4E79; color: #fff; }
+.navbar-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; padding: 0 24px; max-width: 1200px; margin: 0 auto; }
+.navbar-brand { display: flex; align-items: center; }
+.navbar-title { font-size: 1.1rem; color: #fff; }
+.navbar-gold-bar { height: 4px; background: linear-gradient(90deg, #FDB813, #f0a500); }
+
+/* Candidates */
+.main-content { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+.candidate-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+.candidate-card { background: #fff; border-radius: 12px; border: 1px solid #CBD5E1; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+.candidate-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+.candidate-photo { height: 160px; background: linear-gradient(135deg, #1F4E79, #2E75B6); display: flex; align-items: center; justify-content: center; position: relative; }
+.candidate-initials { font-size: 2.5rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
+.candidate-position-badge { position: absolute; bottom: 12px; left: 12px; background: #FDB813; color: #1F4E79; font-size: .7rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.5px; }
+.candidate-body { padding: 20px; }
+.candidate-name { font-weight: 700; color: #1F4E79; margin-bottom: 6px; font-size: 1.1rem; }
+.candidate-bio  { font-size: .85rem; color: #64748B; margin-bottom: 16px; line-height: 1.5; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: .9rem; transition: all .2s; text-decoration: none; }
+.btn-primary { background: #1F4E79; color: #fff; width: 100%; }
+.btn-primary:hover { background: #163b5c; transform: scale(1.02); }
+.btn-block { width: 100%; }
+.btn-sm { padding: 6px 16px; font-size: .8rem; border-radius: 6px; }
+
+/* Forms */
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: .825rem; font-weight: 600; margin-bottom: 5px; color: #334155; }
+.form-group input { width: 100%; padding: 10px 14px; border: 1.5px solid #CBD5E1; border-radius: 8px; font-size: .9rem; transition: border-color .2s; }
+.form-group input:focus { border-color: #2E75B6; outline: none; box-shadow: 0 0 0 3px rgba(46,117,182,0.1); }
+
+/* Alerts */
+.alert { padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: .875rem; }
+.alert-error   { background: #FEE2E2; color: #991B1B; border-left: 4px solid #dc2626; }
+.alert-success { background: #DCFCE7; color: #166534; border-left: 4px solid #16a34a; }
+
+/* Result bars */
+.result-bar-track { height: 8px; background: #F0F4F8; border-radius: 999px; overflow: hidden; margin: 10px 0 4px; }
+.result-bar-fill  { height: 100%; background: linear-gradient(90deg, #2E75B6, #FDB813); border-radius: 999px; transition: width 0.8s ease; }
+
+/* Auth link */
+.auth-link { text-align: center; margin-top: 16px; font-size: .85rem; color: #64748B; }
+.auth-link a { color: #2E75B6; font-weight: 600; text-decoration: none; }
+.auth-link a:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar-inner { flex-wrap: wrap; height: auto; padding: 12px 16px; gap: 8px; }
+    .navbar-user { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+    .candidate-grid { grid-template-columns: 1fr; }
+    .auth-card { padding: 24px; }
+}
