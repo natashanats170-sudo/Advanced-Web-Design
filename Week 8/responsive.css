@@ -1,0 +1,403 @@
+/**
+ * responsive.css - Mobile-first responsive styles
+ * University Voting System | BIT3208
+ * Breakpoints: Mobile <768px | Tablet 768px | Laptop 1024px | Desktop 1440px
+ */
+
+/* ── CSS Reset and Base ──────────────────────────────────────────── */
+*, *::before, *::after { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+html { 
+    font-size: 16px; 
+    scroll-behavior: smooth; 
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #1E293B;
+    background-color: #f0f4f8;
+}
+
+/* ── Images always fit their container ──────────────────────────── */
+img { 
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+}
+
+/* ── Navigation - stacked on mobile ─────────────────────────────── */
+.navbar {
+    background: #1F4E79;
+    padding: 12px 16px;
+}
+
+.navbar-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-brand img {
+    height: 35px;
+    width: auto;
+}
+
+.navbar-title {
+    color: #fff;
+    font-size: 1em;
+}
+
+.navbar-user {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+}
+
+.navbar-user span {
+    color: #BDD7EE;
+    font-size: 0.85em;
+}
+
+.navbar-gold-bar {
+    height: 3px;
+    background: linear-gradient(90deg, #FDB813, #f0a500);
+}
+
+/* ── Main Content ────────────────────────────────────────────────── */
+.main-content {
+    padding: 16px;
+    max-width: 100%;
+}
+
+/* ── Candidate Grid - single column on mobile ───────────────────── */
+.candidate-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px 0;
+}
+
+.candidate-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #CBD5E1;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.candidate-card:active {
+    transform: scale(0.98);
+}
+
+.candidate-photo {
+    height: 140px;
+    background: linear-gradient(135deg, #1F4E79, #2E75B6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.candidate-initials {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+.candidate-position-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: #FDB813;
+    color: #1F4E79;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.candidate-body {
+    padding: 16px;
+}
+
+.candidate-name {
+    font-weight: 700;
+    color: #1F4E79;
+    margin-bottom: 4px;
+    font-size: 1.05rem;
+}
+
+.candidate-bio {
+    font-size: 0.85rem;
+    color: #64748B;
+    margin-bottom: 14px;
+    line-height: 1.5;
+}
+
+/* ── Buttons - touch-friendly on mobile ────────────────────────── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    transition: all 0.2s;
+    text-decoration: none;
+    min-height: 44px; /* Apple's recommended touch target size */
+    min-width: 44px;
+}
+
+.btn-primary {
+    background: #1F4E79;
+    color: #fff;
+    width: 100%;
+}
+
+.btn-primary:active {
+    background: #163b5c;
+    transform: scale(0.98);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    min-height: 36px;
+}
+
+/* ── Auth Pages ───────────────────────────────────────────────────── */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1F4E79, #0d2137);
+    padding: 20px;
+}
+
+.auth-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 20px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.auth-card h1 {
+    font-size: 1.5rem;
+    color: #1F4E79;
+}
+
+.auth-card img {
+    max-height: 60px;
+    margin: 0 auto;
+}
+
+/* ── Forms - touch-friendly on mobile ────────────────────────────── */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #334155;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    min-height: 44px; /* Touch-friendly */
+}
+
+.form-group input:focus {
+    border-color: #2E75B6;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(46,117,182,0.1);
+}
+
+/* ── Alerts ───────────────────────────────────────────────────────── */
+.alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+}
+
+.alert-error {
+    background: #FEE2E2;
+    color: #991B1B;
+    border-left: 4px solid #dc2626;
+}
+
+.alert-success {
+    background: #DCFCE7;
+    color: #166534;
+    border-left: 4px solid #16a34a;
+}
+
+/* ── Result Bars ──────────────────────────────────────────────────── */
+.result-bar-track {
+    height: 10px;
+    background: #F0F4F8;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 8px 0 4px;
+}
+
+.result-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2E75B6, #FDB813);
+    border-radius: 999px;
+    transition: width 0.8s ease;
+}
+
+/* ── Auth Link ────────────────────────────────────────────────────── */
+.auth-link {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: #64748B;
+}
+
+.auth-link a {
+    color: #2E75B6;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-link a:active {
+    color: #1F4E79;
+}
+
+/* ── ═══════════════════════════════════════════════════════════════
+    TABLET (768px and above)
+    ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 768px) {
+    .navbar-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 64px;
+        padding: 0 24px;
+    }
+    
+    .navbar-user {
+        width: auto;
+        gap: 12px;
+    }
+    
+    .main-content {
+        padding: 24px 32px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .candidate-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .auth-card {
+        padding: 36px 32px;
+    }
+    
+    .candidate-photo {
+        height: 160px;
+    }
+    
+    .candidate-initials {
+        font-size: 2.5rem;
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+}
+
+/* ── ═══════════════════════════════════════════════════════════════
+    LAPTOP (1024px and above)
+    ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+    .candidate-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+    
+    .navbar-title {
+        font-size: 1.1rem;
+    }
+    
+    .main-content {
+        padding: 32px 40px;
+    }
+    
+    .candidate-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+}
+
+/* ── ═══════════════════════════════════════════════════════════════
+    DESKTOP (1440px and above)
+    ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 1440px) {
+    .candidate-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .main-content {
+        max-width: 1400px;
+        padding: 40px 60px;
+    }
+}
+
+/* ── ═══════════════════════════════════════════════════════════════
+    PRINT STYLES
+    ═══════════════════════════════════════════════════════════════ */
+@media print {
+    .navbar {
+        display: none;
+    }
+    
+    .btn {
+        display: none;
+    }
+    
+    .candidate-card {
+        border: 1px solid #000;
+        break-inside: avoid;
+    }
+}
