@@ -1,0 +1,9 @@
+{
+    "php.validate.executablePath": "C:/xampp/php/php.exe",
+    "php.validate.enable": true,
+    "files.associations": {
+        "*.php": "php"
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+}
